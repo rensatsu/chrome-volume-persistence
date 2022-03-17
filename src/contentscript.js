@@ -1,4 +1,4 @@
-(function () {
+(() => {
     const STORAGE_KEY = "volume";
 
     const storage = (chrome ?? browser).storage;
@@ -34,7 +34,7 @@
         // Fix for 'Extension context invalidated' error.
         if (!runtime?.id) return;
 
-        storage.local.get([hostStorageKey], function (data) {
+        storage.local.get([hostStorageKey], (data) => {
             debug("Got settings:", { ...data });
 
             // Check if extension is enabled for current host
