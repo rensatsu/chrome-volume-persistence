@@ -1,8 +1,8 @@
 {
-    "name" : "Persistent Video/Audio Volume",
-    "version" : "0.12.0",
+    "name" : "Volume Persistence",
+    "version" : "1.0",
     "manifest_version" : 3,
-    "description" : "Saves video and audio volume",
+    "description" : "Set and persist audio and video volume per domain",
     "permissions": ["storage", "activeTab"],
     "icons": {
         "48": "img/icon48.png",

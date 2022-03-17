@@ -1,10 +1,9 @@
 #/bin/bash
+set -o errexit
+set -o pipefail
+set -o nounset
 
-cd src
-zip ../persistent-video-volume.zip \
-    manifest.json \
-    pvv.png \
-    popup.js \
-    popup.html \
-    icon*.png \
-    contentscript.js
+NAME="chrome-volume-persistence.zip"
+
+rm $NAME 2>/dev/null || true
+(cd src && zip -r ../$NAME .)

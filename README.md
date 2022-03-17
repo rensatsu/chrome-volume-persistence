@@ -1,4 +1,6 @@
-# Persistent Video/Audio Volume
+# Volume Persistence
+
+![Promo image](./store/promo.png)
 
 ## Features
 
@@ -14,26 +16,30 @@
 
 # Credits
 
--   Icons made by [Smashicons][smashicons] from [www.flaticon.com][flaticon] is
-    licensed by [Creative Commons BY 3.0][icon-license].
+-   Icon by [DailyYouth][icon-author] from [iconfinder.com][iconfinder]
+    is licensed under [Creative Commons (Attribution 3.0 Unported)][icon-license].
+
+-   This extension is a fork of [persistent-video-volume][original] extension
+    by [puddingspudding][original-author].
 
 # Build
 
 ## Package Extension
 
+### Linux / WSL
+
 ```bash
 ./build.sh
 ```
+
+### Windows
 
 ```bat
 build.bat
 ```
 
-# Original code
-
-This extension is a fork of [persistent-video-volume][original].
-
 [original]: https://github.com/puddingspudding/persistent-video-volume
-[smashicons]: https://www.flaticon.com/authors/smashicons
-[flaticon]: https://www.flaticon.com/
+[original-author]: https://github.com/puddingspudding
+[icon-author]: https://www.iconfinder.com/iconofoxy
+[iconfinder]: https://www.iconfinder.com/icons/3643734
 [icon-license]: https://creativecommons.org/licenses/by/3.0/
