@@ -3,6 +3,7 @@ const DEFAULT_VOLUME = 100;
 
 const storage = (chrome ?? browser).storage;
 const tabs = (chrome ?? browser).tabs;
+const runtime = (chrome ?? browser).runtime;
 
 function parseHostFromURL(url) {
     const u = new URL(url);
@@ -17,7 +18,14 @@ function setStatusLabel(disabled, host, customText = null) {
         (disabled ? `Disabled for ${host}` : `Enabled for ${host}`);
 }
 
+function setTitle() {
+    const el = document.querySelector("#extension-title");
+    el.textContent = runtime.getManifest().name;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    setTitle();
+
     let host = "";
 
     const websiteSlider = document.querySelector("#website-slider");
@@ -41,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!currentTab) {
                 setStatusLabel(null, null, "Unsupported scheme");
+                setVolumeLabel(websiteSlider.valueAsNumber);
                 status.indeterminate = true;
                 status.disabled = true;
                 status.checked = false;
@@ -96,8 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         } else {
             websiteSlider.value = DEFAULT_VOLUME;
-            setVolumeLabel(DEFAULT_VOLUME);
-            storage.local.remove([hostStorageKey], () => {});
+            storage.local.remove([hostStorageKey], () => {
+                setVolumeLabel(DEFAULT_VOLUME);
+                setStatusLabel(!enabled, host);
+            });
         }
     });
 });
