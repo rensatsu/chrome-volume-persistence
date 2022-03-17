@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
             host = parseHostFromURL(currentTab.url);
             const hostStorageKey = `${STORAGE_KEY}_${host}`;
             storage.local.get([hostStorageKey], (data) => {
-                const hostStatus = data?.[hostStorageKey] !== null;
+                const hostStatus = data?.[hostStorageKey] !== undefined;
                 status.checked = hostStatus;
                 websiteSlider.disabled = !hostStatus;
                 setStatusLabel(!hostStatus, host);
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             websiteSlider.value = DEFAULT_VOLUME;
             setVolumeLabel(DEFAULT_VOLUME);
-            storage.local.remove([hostStatusKey, hostStorageKey], () => {});
+            storage.local.remove([hostStorageKey], () => {});
         }
     });
 });
