@@ -20,11 +20,19 @@
             <section>
                 <label for="website-slider">Website volume</label>
                 <div class="range-output">
-                    <input type="range" min="0" max="100" value="50" step="1" id="website-slider" />
+                    <input type="range" min="0" max="100" value="50" step="1" id="website-slider" list="range-datalist" />
                     <output id="volume-value-label" for="website-slider"></output>
                 </div>
             </section>
         </main>
+
+        <datalist id="range-datalist">
+            <option>0</option>
+            <option>25</option>
+            <option>50</option>
+            <option>75</option>
+            <option>100</option>
+        </datalist>
 
         <script src="popup.js"></script>
     </body>
