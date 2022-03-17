@@ -1,5 +1,6 @@
 const STORAGE_KEY = "volume";
 const STATUS_KEY = "enabled";
+const DEFAULT_VOLUME = 100;
 
 const storage = (chrome ?? browser).storage;
 const tabs = (chrome ?? browser).tabs;
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let volume = data?.[hostStorageKey];
             if (isNaN(volume)) {
-                volume = 100;
+                volume = DEFAULT_VOLUME;
             }
 
             websiteSlider.value = volume;
@@ -70,16 +71,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     status.addEventListener("input", () => {
         const enabled = status.checked;
+        const hostStatusKey = `${STATUS_KEY}_${host}`;
+        const hostStorageKey = `${STORAGE_KEY}_${host}`;
         websiteSlider.disabled = !enabled;
 
-        const settings = {
-            [`${STATUS_KEY}_${host}`]: enabled,
-        };
+        if (enabled) {
+            const settings = {
+                [hostStatusKey]: enabled,
+            };
 
-        storage.local.set(settings, () => {
-            setStatusLabel(!enabled, host);
-            tabs.sendMessage(currentTab.id, true);
-        });
+            storage.local.set(settings, () => {
+                setStatusLabel(!enabled, host);
+                tabs.sendMessage(currentTab.id, true);
+            });
+        } else {
+            websiteSlider.value = DEFAULT_VOLUME;
+            setVolumeLabel(DEFAULT_VOLUME);
+            storage.local.remove([hostStatusKey, hostStorageKey], () => { });
+        }
     });
 
     function parseHostFromURL(url) {
