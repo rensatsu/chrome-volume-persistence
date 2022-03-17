@@ -1,5 +1,6 @@
 (() => {
     const STORAGE_KEY = "volume";
+    const LOOP_DELAY = 500;
 
     const storage = (chrome ?? browser).storage;
     const runtime = (chrome ?? browser).runtime;
@@ -60,6 +61,8 @@
             // Check if there are video elements
             if (videoElements.length === 0) {
                 debug("No video elements found");
+                // Restart loop
+                setTimeout(() => start(), LOOP_DELAY);
                 return;
             }
 
@@ -69,7 +72,7 @@
             });
 
             // Restart loop
-            setTimeout(() => start(), 500);
+            setTimeout(() => start(), LOOP_DELAY);
         });
     }
 
