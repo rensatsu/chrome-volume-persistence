@@ -5,6 +5,7 @@
     const storage = (chrome ?? browser).storage;
     const runtime = (chrome ?? browser).runtime;
 
+    // Workaround for "Extension context invalidated" error
     let runtimePort = runtime.connect();
     runtimePort.onDisconnect.addListener(() => {
         runtimePort = undefined;
@@ -68,7 +69,8 @@
 
             // Apply volume for all video elements
             videoElements.forEach((tag) => {
-                tag.volume = data[hostStorageKey] / 100;
+                // Using power of 2 scale for volume
+                tag.volume = Math.pow(data[hostStorageKey] / 100, 2);
             });
 
             // Restart loop
