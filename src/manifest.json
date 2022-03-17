@@ -1,21 +1,20 @@
 {
     "name" : "Persistent Video/Audio Volume",
-    "version" : "0.11.0",
-    "manifest_version" : 2,
+    "version" : "0.12.0",
+    "manifest_version" : 3,
     "description" : "Saves video and audio volume",
-    "permissions": ["storage", "tabs", "<all_urls>"],
+    "permissions": ["storage", "activeTab"],
     "icons": {
         "48": "icon48.png",
         "128": "icon128.png"
     },
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
-            "css": [],
+            "matches": ["http://*/*", "https://*/*"],
             "js": ["contentscript.js"]
         }
     ],
-    "browser_action": {
+    "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "icon16.png",

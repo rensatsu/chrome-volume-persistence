@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Persistent Video Volume - Settings</title>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="popup.css" />
+    </head>
+    <body>
+        <main>
+            <section class="horizontal">
+                <label for="status" id="status-label">Enabled</label>
+                <input id="status" type="checkbox" />
+            </section>
+
+            <section>
+                <label for="website-slider">Website volume</label>
+                <div class="range-output">
+                    <input type="range" min="0" max="100" value="50" step="1" id="website-slider" />
+                    <output id="volume-value-label" for="website-slider"></output>
+                </div>
+            </section>
+        </main>
+
+        <script src="popup.js"></script>
+    </body>
+</html>
