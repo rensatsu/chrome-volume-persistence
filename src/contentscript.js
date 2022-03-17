@@ -1,6 +1,5 @@
 (function () {
     const STORAGE_KEY = "volume";
-    const STATUS_KEY = "enabled";
 
     const storage = (chrome ?? browser).storage;
     const runtime = (chrome ?? browser).runtime;
@@ -30,17 +29,16 @@
 
     function setVolume() {
         const host = window.location.host;
-        const hostStatusKey = `${STATUS_KEY}_${host}`;
         const hostStorageKey = `${STORAGE_KEY}_${host}`;
 
         // Fix for 'Extension context invalidated' error.
         if (!runtime?.id) return;
 
-        storage.local.get([hostStatusKey, hostStorageKey], function (data) {
+        storage.local.get([hostStorageKey], function (data) {
             debug("Got settings:", { ...data });
 
             // Check if extension is enabled for current host
-            if (data?.[hostStorageKey] === null || !data?.[hostStatusKey]) {
+            if (data?.[hostStorageKey] === null) {
                 debug("Not enabled for this host", host);
                 return;
             }

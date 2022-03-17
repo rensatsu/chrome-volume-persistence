@@ -1,5 +1,4 @@
 const STORAGE_KEY = "volume";
-const STATUS_KEY = "enabled";
 const DEFAULT_VOLUME = 100;
 
 const storage = (chrome ?? browser).storage;
@@ -9,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let host = "";
 
     const websiteSlider = document.querySelector("#website-slider");
+    websiteSlider.value = DEFAULT_VOLUME;
 
     const status = document.querySelector("#status");
     const statusLabel = document.querySelector("#status-label");
-
     const websiteText = document.querySelector("#volume-value-label");
 
     const setVolumeLabel = function (volume) {
@@ -38,10 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         host = parseHostFromURL(currentTab.url);
-        const hostStatusKey = `${STATUS_KEY}_${host}`;
         const hostStorageKey = `${STORAGE_KEY}_${host}`;
-        storage.local.get([hostStatusKey, hostStorageKey], (data) => {
-            const hostStatus = data?.[hostStatusKey] ?? false;
+        storage.local.get([hostStorageKey], (data) => {
+            const hostStatus = data?.[hostStorageKey] !== null;
             status.checked = hostStatus;
             websiteSlider.disabled = !hostStatus;
             setStatusLabel(!hostStatus, host);
@@ -71,13 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     status.addEventListener("input", () => {
         const enabled = status.checked;
-        const hostStatusKey = `${STATUS_KEY}_${host}`;
         const hostStorageKey = `${STORAGE_KEY}_${host}`;
         websiteSlider.disabled = !enabled;
 
         if (enabled) {
             const settings = {
-                [hostStatusKey]: enabled,
+                [hostStorageKey]: websiteSlider.valueAsNumber,
             };
 
             storage.local.set(settings, () => {
