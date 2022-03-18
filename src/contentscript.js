@@ -1,88 +1,86 @@
 (() => {
-    const STORAGE_KEY = "volume";
-    const LOOP_DELAY = 500;
+  const STORAGE_KEY = "volume";
+  const LOOP_DELAY = 500;
 
-    const storage = (chrome ?? browser).storage;
-    const runtime = (chrome ?? browser).runtime;
+  const storage = (chrome ?? browser).storage;
+  const runtime = (chrome ?? browser).runtime;
 
-    // Workaround for "Extension context invalidated" error
-    let runtimePort = runtime.connect();
-    runtimePort.onDisconnect.addListener(() => {
-        runtimePort = undefined;
-    });
+  // Workaround for "Extension context invalidated" error
+  let runtimePort = runtime.connect();
+  runtimePort.onDisconnect.addListener(() => {
+    runtimePort = undefined;
+  });
 
-    /**
-     * Write console logs only when extension is loaded as unpacked
-     */
-    function debug() {
-        const manifest = runtime.getManifest();
-        if ("update_url" in manifest) {
-            return;
-        }
-
-        const prefix = `[${manifest.name}]`;
-
-        console.log(prefix, ...arguments);
+  /**
+   * Write console logs only when extension is loaded as unpacked
+   */
+  function debug() {
+    const manifest = runtime.getManifest();
+    if ("update_url" in manifest) {
+      return;
     }
 
-    runtimePort.onMessage.addListener(() => {
-        setVolume();
-    });
+    const prefix = `[${manifest.name}]`;
 
-    function setVolume() {
-        const host = window.location.host;
-        const hostStorageKey = `${STORAGE_KEY}_${host}`;
+    console.log(prefix, ...arguments);
+  }
 
-        // Fix for 'Extension context invalidated' error.
-        if (!runtime?.id) return;
+  runtimePort.onMessage.addListener(() => {
+    setVolume();
+  });
 
-        storage.local.get([hostStorageKey], (data) => {
-            debug("Got settings:", { ...data });
+  function setVolume() {
+    const host = window.location.host;
+    const hostStorageKey = `${STORAGE_KEY}_${host}`;
 
-            // Check if extension is enabled for current host
-            if (data?.[hostStorageKey] === null) {
-                debug("Not enabled for this host", host);
-                return;
-            }
+    // Fix for 'Extension context invalidated' error.
+    if (!runtime?.id) return;
 
-            // Collecting video elements from main document
-            let videoElements = [...document.querySelectorAll("video, audio")];
+    storage.local.get([hostStorageKey], (data) => {
+      debug("Got settings:", { ...data });
 
-            // Collecting video elements from iframes
-            [...document.getElementsByTagName("iframe")]
-                .filter((frame) => frame.contentDocument)
-                .forEach((frame) => {
-                    videoElements = videoElements.concat([
-                        ...frame.contentDocument.querySelectorAll(
-                            "video, audio",
-                        ),
-                    ]);
-                });
+      // Check if extension is enabled for current host
+      if (data?.[hostStorageKey] === null) {
+        debug("Not enabled for this host", host);
+        return;
+      }
 
-            // Check if there are video elements
-            if (videoElements.length === 0) {
-                debug("No video elements found");
-                // Restart loop
-                setTimeout(() => start(), LOOP_DELAY);
-                return;
-            }
+      // Collecting video elements from main document
+      let videoElements = [...document.querySelectorAll("video, audio")];
 
-            // Apply volume for all video elements
-            videoElements.forEach((tag) => {
-                // Using power of 2 scale for volume
-                tag.volume = Math.pow(data[hostStorageKey] / 100, 2);
-            });
-
-            // Restart loop
-            setTimeout(() => start(), LOOP_DELAY);
+      // Collecting video elements from iframes
+      [...document.getElementsByTagName("iframe")]
+        .filter((frame) => frame.contentDocument)
+        .forEach((frame) => {
+          videoElements = videoElements.concat([
+            ...frame.contentDocument.querySelectorAll("video, audio"),
+          ]);
         });
-    }
 
-    function start() {
-        window.requestAnimationFrame(() => {
-            setVolume();
-        });
-    }
+      // Check if there are video elements
+      if (videoElements.length === 0) {
+        debug("No video elements found");
+        // Restart loop
+        setTimeout(() => start(), LOOP_DELAY);
+        return;
+      }
 
-    start();
+      // Apply volume for all video elements
+      videoElements.forEach((tag) => {
+        // Using power of 2 scale for volume
+        tag.volume = Math.pow(data[hostStorageKey] / 100, 2);
+      });
+
+      // Restart loop
+      setTimeout(() => start(), LOOP_DELAY);
+    });
+  }
+
+  function start() {
+    window.requestAnimationFrame(() => {
+      setVolume();
+    });
+  }
+
+  start();
 })();

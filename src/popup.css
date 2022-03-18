@@ -1,59 +1,59 @@
 html,
 body {
-    width: 40ch;
-    padding: 0px;
-    margin: 0px;
-    font-family: system-ui, sans-serif;
-    font-size: 1rem;
-    user-select: none;
+  width: 40ch;
+  padding: 0px;
+  margin: 0px;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  user-select: none;
 }
 
 h1 {
-    font-size: 1.05em;
-    margin: 0.5rem 0.5rem 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 1ch;
+  font-size: 1.05em;
+  margin: 0.5rem 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1ch;
 }
 
 section {
-    margin: 0.75rem 0.5rem;
+  margin: 0.75rem 0.5rem;
 }
 
 section > label {
-    display: block;
+  display: block;
 }
 
 section > label[for] {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 section > .range-output {
-    display: flex;
-    gap: 1ch;
+  display: flex;
+  gap: 1ch;
 }
 
 section > .range-output > input[type="range"] {
-    display: block;
-    width: 100%;
-    margin: 0;
+  display: block;
+  width: 100%;
+  margin: 0;
 }
 
 input[disabled] + output {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 section > .range-output > output {
-    width: 7ch;
-    font-family: monospace;
-    text-align: right;
+  width: 7ch;
+  font-family: monospace;
+  text-align: right;
 }
 
 section.horizontal {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 section.horizontal > label {
-    flex: 1;
+  flex: 1;
 }

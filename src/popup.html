@@ -1,39 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Settings</title>
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="popup.css" />
-    </head>
-    <body>
-        <main>
-            <h1>
-                <img src="img/icon16.png" alt="Extension logo">
-                <span id="extension-title">Title</span>
-            </h1>
-            <section class="horizontal">
-                <label for="status" id="status-label">Enabled</label>
-                <input id="status" type="checkbox" />
-            </section>
+  <head>
+    <meta charset="utf-8" />
+    <title>Settings</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>
+        <img src="img/icon16.png" alt="Extension logo" />
+        <span id="extension-title">Title</span>
+      </h1>
+      <section class="horizontal">
+        <label for="status" id="status-label">Enabled</label>
+        <input id="status" type="checkbox" />
+      </section>
 
-            <section>
-                <label for="website-slider">Website volume</label>
-                <div class="range-output">
-                    <input type="range" min="0" max="100" value="50" step="1" id="website-slider" list="range-datalist" />
-                    <output id="volume-value-label" for="website-slider"></output>
-                </div>
-            </section>
-        </main>
+      <section>
+        <label for="website-slider">Website volume</label>
+        <div class="range-output">
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            step="1"
+            id="website-slider"
+            list="range-datalist"
+          />
+          <output id="volume-value-label" for="website-slider"></output>
+        </div>
+      </section>
+    </main>
 
-        <datalist id="range-datalist">
-            <option>0</option>
-            <option>25</option>
-            <option>50</option>
-            <option>75</option>
-            <option>100</option>
-        </datalist>
+    <datalist id="range-datalist">
+      <option>0</option>
+      <option>25</option>
+      <option>50</option>
+      <option>75</option>
+      <option>100</option>
+    </datalist>
 
-        <script src="popup.js"></script>
-    </body>
+    <script src="popup.js"></script>
+  </body>
 </html>

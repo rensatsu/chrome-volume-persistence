@@ -1,7 +1,7 @@
 interface IBrowser {
-    storage: any;
-    tabs: any;
-    runtime: any;
+  storage: any;
+  tabs: any;
+  runtime: any;
 }
 
 declare var chrome: IBrowser;

@@ -1,25 +1,24 @@
 {
-    "name" : "Volume Persistence",
-    "version" : "1.0",
-    "manifest_version" : 3,
-    "description" : "Set and persist audio and video volume per domain",
-    "permissions": ["storage", "activeTab"],
-    "icons": {
-        "48": "img/icon48.png",
-        "128": "img/icon128.png"
-    },
-    "content_scripts": [
-        {
-            "matches": ["http://*/*", "https://*/*"],
-            "js": ["contentscript.js"]
-        }
-    ],
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "img/icon16.png",
-            "32": "img/icon32.png"
-        }
+  "name": "Volume Persistence",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Set and persist audio and video volume per domain",
+  "permissions": ["storage", "activeTab"],
+  "icons": {
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["contentscript.js"]
     }
-
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png"
+    }
+  }
 }
