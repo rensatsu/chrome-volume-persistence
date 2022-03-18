@@ -1,3 +1,15 @@
+:root {
+  --color-background: #fefefe;
+  --color-text: #222;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #3b3b3b;
+    --color-text: #d2d2d2;
+  }
+}
+
 html,
 body {
   width: 40ch;
@@ -6,6 +18,8 @@ body {
   font-family: system-ui, sans-serif;
   font-size: 1rem;
   user-select: none;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 h1 {
