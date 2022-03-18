@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             currentTab = tabs?.[0];
 
             if (!currentTab) {
-                setStatusLabel(null, null, "Unsupported scheme");
+                setStatusLabel(null, null, "Site is not supported");
                 setVolumeLabel(websiteSlider.valueAsNumber);
                 status.indeterminate = true;
                 status.disabled = true;
