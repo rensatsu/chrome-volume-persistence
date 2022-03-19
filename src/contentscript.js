@@ -40,7 +40,7 @@
       debug("Got settings:", { ...data });
 
       // Check if extension is enabled for current host
-      if (data?.[hostStorageKey] === null) {
+      if (data?.[hostStorageKey] === undefined) {
         debug("Not enabled for this host", host);
         return;
       }
