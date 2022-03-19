@@ -5,6 +5,11 @@
   const storage = (chrome ?? browser).storage;
   const runtime = (chrome ?? browser).runtime;
 
+  // Enable or disable debug output
+  // Use `chrome.storage.local.set({ debug: true })` to enable debug
+  let debugAllowed = false;
+  chrome.storage.local.get("debug", ({ debug }) => (debugAllowed = !!debug));
+
   // Workaround for "Extension context invalidated" error
   let runtimePort = runtime.connect();
   runtimePort.onDisconnect.addListener(() => {
@@ -15,10 +20,11 @@
    * Write console logs only when extension is loaded as unpacked
    */
   function debug() {
-    const manifest = runtime.getManifest();
-    if ("update_url" in manifest) {
+    if (!debugAllowed) {
       return;
     }
+
+    const manifest = runtime.getManifest();
 
     const prefix = `[${manifest.name}]`;
 
