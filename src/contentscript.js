@@ -66,8 +66,6 @@
       // Check if there are video elements
       if (videoElements.length === 0) {
         debug("No video elements found");
-        // Restart loop
-        setTimeout(() => start(), LOOP_DELAY);
         return;
       }
 
@@ -76,15 +74,13 @@
         // Using power of 2 scale for volume
         tag.volume = Math.pow(data[hostStorageKey] / 100, 2);
       });
-
-      // Restart loop
-      setTimeout(() => start(), LOOP_DELAY);
     });
   }
 
   function start() {
     window.requestAnimationFrame(() => {
       setVolume();
+      setTimeout(() => start(), LOOP_DELAY);
     });
   }
 
