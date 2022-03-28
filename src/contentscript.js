@@ -10,12 +10,6 @@
   let debugAllowed = false;
   chrome.storage.local.get("debug", ({ debug }) => (debugAllowed = !!debug));
 
-  // Workaround for "Extension context invalidated" error
-  let runtimePort = runtime.connect();
-  runtimePort.onDisconnect.addListener(() => {
-    runtimePort = undefined;
-  });
-
   /**
    * Write console logs only when extension is loaded as unpacked
    */
@@ -31,7 +25,7 @@
     console.log(prefix, ...arguments);
   }
 
-  runtimePort.onMessage.addListener(() => {
+  runtime.onMessage.addListener(() => {
     setVolume();
   });
 

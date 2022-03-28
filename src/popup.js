@@ -84,7 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     storage.local.set(settings, () => {
       setVolumeLabel(val);
-      tabs.sendMessage(currentTab.id, true);
+      tabs.sendMessage(currentTab.id, true, () => {
+        if (runtime.lastError) {
+          void 0;
+        }
+      });
     });
   });
 
