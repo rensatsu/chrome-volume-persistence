@@ -1,6 +1,6 @@
 {
   "name": "Volume Persistence",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "description": "Set and persist audio and video volume per domain",
   "permissions": ["storage", "activeTab"],
@@ -20,5 +20,9 @@
       "16": "img/icon16.png",
       "32": "img/icon32.png"
     }
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
   }
 }

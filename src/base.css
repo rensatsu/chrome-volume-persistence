@@ -1,0 +1,26 @@
+:root {
+  --color-background: #fefefe;
+  --color-text: #222;
+  --page-margin: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #3b3b3b;
+    --color-text: #d2d2d2;
+  }
+}
+
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+[hidden] {
+  display: none !important;
+}
