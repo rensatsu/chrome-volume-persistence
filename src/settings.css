@@ -1,0 +1,34 @@
+html,
+body {
+  width: 60ch;
+}
+
+h1 {
+  font-size: 1.05em;
+  margin: 0.5rem 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+}
+
+section {
+  margin: var(--page-margin);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-rows: auto;
+  gap: 0.5rem 0.5rem;
+}
+
+dt {
+  display: flex;
+  gap: 1ch;
+}
+
+dd {
+  margin: 0;
+  text-align: right;
+  font-family: monospace;
+}
