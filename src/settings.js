@@ -63,7 +63,9 @@ function loadSites() {
 
 async function clearAllSites() {
   const data = await storage.local.get();
-  const sites = Object.entries(data).filter(filterOnlyVolumeEntries).map(([key]) => key);
+  const sites = Object.entries(data)
+    .filter(filterOnlyVolumeEntries)
+    .map(([key]) => key);
   return await storage.local.remove(sites);
 }
 
@@ -95,9 +97,7 @@ async function exportButtonHandler() {
 
   const contents = JSON.stringify(
     Object.fromEntries(
-      Object.entries(storageData).filter(([key]) =>
-        key.startsWith(`${STORAGE_KEY}_`),
-      ),
+      Object.entries(storageData).filter(filterOnlyVolumeEntries),
     ),
     null,
     2,
@@ -122,7 +122,7 @@ async function importButtonHandler() {
   });
   const file = await fileHandle.getFile();
   const contents = await file.text();
-  const json = await parseJson(contents).catch(() => { });
+  const json = await parseJson(contents).catch(() => {});
 
   if (json === undefined) {
     return alert("Malformed file");
