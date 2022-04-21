@@ -1,6 +1,6 @@
 {
   "name": "Volume Persistence",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 3,
   "description": "Set and persist audio and video volume per domain",
   "permissions": ["storage", "activeTab"],

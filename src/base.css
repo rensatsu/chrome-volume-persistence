@@ -1,12 +1,14 @@
 :root {
   --color-background: #fefefe;
+  --color-header-bg: #f7f7f7;
   --color-text: #222;
   --page-margin: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #3b3b3b;
+    --color-background: #333;
+    --color-header-bg: #3b3b3b;
     --color-text: #d2d2d2;
   }
 }
@@ -23,4 +25,20 @@ body {
 
 [hidden] {
   display: none !important;
+}
+
+header h1 {
+  font-size: 1.05rem;
+  margin: 0;
+  padding: var(--page-margin) var(--page-margin) 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  background-color: var(--color-header-bg);
+  user-select: none;
+}
+
+header h1 img {
+  width: 1rem;
+  height: 1rem;
 }

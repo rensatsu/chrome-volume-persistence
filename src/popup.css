@@ -4,16 +4,11 @@ body {
   width: 40ch;
 }
 
-h1 {
-  font-size: 1.05em;
-  margin: var(--page-margin) var(--page-margin) 0.75rem;
+main {
+  margin: var(--page-margin);
   display: flex;
-  align-items: center;
-  gap: 1ch;
-}
-
-section {
-  margin: 0.75rem var(--page-margin);
+  flex-direction: column;
+  gap: var(--page-margin);
 }
 
 section > label {

@@ -5,9 +5,13 @@ const storage = (chrome ?? browser).storage;
 const tabs = (chrome ?? browser).tabs;
 const runtime = (chrome ?? browser).runtime;
 
+function getExtName() {
+  return runtime.getManifest().name;
+}
+
 function setTitle() {
   const el = document.querySelector("#extension-title");
-  const title = runtime.getManifest().name;
+  const title = getExtName();
   el.textContent = title;
   document.title = title;
 }
@@ -139,6 +143,22 @@ async function importButtonHandler() {
   location.reload();
 }
 
+function activateExternalLinks() {
+  document.querySelectorAll("a[data-ext-href]").forEach((link) => {
+    const url = link.dataset.extHref;
+    delete link.dataset.extHref;
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener external";
+  });
+}
+
+function showVersion() {
+  const label = document.querySelector("#version-info");
+  const manifest = runtime.getManifest();
+  label.textContent = `${getExtName()} v${manifest.version}`;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setTitle();
   loadSites();
@@ -154,4 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelector("#clear-button")
     .addEventListener("click", clearButtonHandler);
+
+  activateExternalLinks();
+  showVersion();
 });

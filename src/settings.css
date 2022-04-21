@@ -1,17 +1,13 @@
-html,
-body {
-  width: 60ch;
-}
-
-h1 {
-  font-size: 1.05em;
-  margin: 0.5rem 0.5rem 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 1ch;
+main, footer {
+  max-width: 70ch;
+  width: 100%;
 }
 
 section {
+  margin: var(--page-margin);
+}
+
+footer {
   margin: var(--page-margin);
 }
 

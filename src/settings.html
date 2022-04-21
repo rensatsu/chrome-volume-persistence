@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="settings.css" />
   </head>
   <body>
-    <main>
+    <header>
       <h1>
-        <img src="img/icon16.png" alt="Extension logo" />
+        <img src="img/icon32.png" alt="Extension logo" />
         <span id="extension-title">Title</span>
       </h1>
+    </header>
+    <main>
       <section>
         <h2>Sites configuration</h2>
         <dl id="sites-list"></dl>
@@ -27,6 +29,28 @@
         <button type="button" id="clear-button">Clear all saved sites</button>
       </section>
     </main>
+
+    <footer>
+      <h2>Credits</h2>
+      <!-- prettier-ignore -->
+      <p>
+        Icon by <a data-ext-href="https://www.iconfinder.com/iconofoxy">DailyYouth</a>
+        from <a data-ext-href="https://www.iconfinder.com/icons/3643734">iconfinder.com</a>
+        is licensed under <a data-ext-href="https://creativecommons.org/licenses/by/3.0/">Creative Commons (Attribution 3.0 Unported)</a>.
+      </p>
+      <!-- prettier-ignore -->
+      <p>
+        This extension is a fork of <a data-ext-href="https://github.com/puddingspudding/persistent-video-volume">persistent-video-volume</a> extension by <a data-ext-href="https://github.com/puddingspudding">puddingspudding</a>.
+      </p>
+
+      <h2>Source code</h2>
+      <a data-ext-href="https://github.com/rensatsu/chrome-volume-persistence">
+        GitHub
+      </a>
+
+      <h2>Version</h2>
+      <span id="version-info">Unknown</span>
+    </footer>
 
     <script src="settings.js"></script>
   </body>
